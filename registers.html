@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <style>
+        /* Add your CSS styles here */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("https://img.freepik.com/free-vector/abstract-realistic-technology-particle-background_23-2148433468.jpg?w=1380&t=st=1696715918~exp=1696716518~hmac=fb655b87a792ea76c143e00f800d2b3c4a0b0a9f8b291dfde0808a3b32c7d548");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1{
+            color:lavenderblush
+        }
+        form {
+            background-color: rgb(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"], input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Registration</h1>
+        </header>
+        <form action = "regis.html"onsubmit="return validateForm()">
+            <label for="fullName">Full Name</label>
+            <input type="text" placeholder="Enter your full name" id="fullName">
+            <span class="error" id="fullNameError"></span>
+
+            <label for="email">Email Address</label>
+            <input type="email" placeholder="Enter your email address" id="email">
+            <span class="error" id="emailError"></span>
+
+            <label for="password">Password</label>
+            <input type="password" placeholder="Choose a password (at least 8 characters)" id="password">
+            <span class="error" id="passwordError"></span>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" placeholder="Confirm your password" id="confirmPassword">
+            <span class="error" id="confirmPasswordError"></span><br>
+
+            <label for="gender">Gender</label>
+            <select id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <br><br>
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob">
+            <span class="error" id="dobError"></span>
+
+            <label>
+                <input type="checkbox" id="terms" required> I have read and agree to the <a href="#">Terms and Conditions</a>.
+            </label>
+            <span class="error" id="termsError"></span>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            // Reset error messages
+            document.getElementById("fullNameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+            document.getElementById("confirmPasswordError").textContent = "";
+            document.getElementById("dobError").textContent = "";
+            document.getElementById("termsError").textContent = "";
+
+            // Get form values
+            var fullName = document.getElementById("fullName").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var dob = document.getElementById("dob").value;
+            var terms = document.getElementById("terms").checked;
+
+            // Check if Full Name is empty
+            if (fullName === "") {
+                document.getElementById("fullNameError").textContent = "Please enter your Full Name";
+                return false;
+            }
+
+            // Check if Email is empty and has a valid format
+            if (email === "") {
+                document.getElementById("emailError").textContent = "Please enter your Email Address";
+                return false;
+            } else if (!validateEmail(email)) {
+                document.getElementById("emailError").textContent = "Please enter a valid Email Address";
+                return false;
+            }
+
+            // Check if Password is empty
+            if (password === "") {
+                document.getElementById("passwordError").textContent = "Please enter a Password";
+                return false;
+            }
+
+            // Check if Password and Confirm Password match
+            if (password !== confirmPassword) {
+                document.getElementById("confirmPasswordError").textContent = "Passwords do not match";
+                return false;
+            }
+
+            // Check if Password meets strength criteria (e.g., at least 8 characters)
+            if (password.length < 8) {
+                document.getElementById("passwordError").textContent = "Password must be at least 8 characters long";
+                return false;
+            }
+
+            // Check if Date of Birth is empty
+            if (dob === "") {
+                document.getElementById("dobError").textContent = "Please enter your Date of Birth";
+                return false;
+            }
+
+            // Check if Terms and Conditions are accepted
+            if (!terms) {
+                document.getElementById("termsError").textContent = "You must accept the Terms and Conditions";
+                return false;
+            }
+
+            return true; // Form is valid
+        }
+
+        function validateEmail(email) {
+            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailRegex.test(email);
+        }
+    </script>
+</body>
+</html>

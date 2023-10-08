@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        /* Reset some default styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("https://img.freepik.com/free-vector/realistic-neon-lights-background_23-2148907367.jpg?w=1380&t=st=1696715356~exp=1696715956~hmac=6113e08981daf2e9fe8f354df86aac7339effd611114af6c2680e26011009cdb");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* Container styles */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header styles */
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Form styles */
+        form {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        h1{
+            color: lavender;
+        }
+        /* Input field styles */
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Button styles */
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Error message styles */
+        .error {
+            color: red;
+        }
+
+        /* Responsive design */
+        @media screen and (max-width: 600px) {
+            form {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sign Up</h1>
+        </header>
+        <form action = "regis.html" onsubmit="return validateForm()">
+            <input type="text" placeholder="Full Name" id="fullName">
+            <span class="error" id="fullNameError"></span>
+
+            <input type="text" placeholder="Email Address" id="email">
+            <span class="error" id="emailError"></span>
+
+            <input type="password" placeholder="Password" id="password">
+            <span class="error" id="passwordError"></span>
+
+            <button type="submit">Sign Up</button><t>
+            <button><a href = "registers.html">Create an account</a></button>
+        </form>
+        
+    </div>
+
+    <script>
+        function validateForm() {
+            // Reset error messages
+            document.getElementById("fullNameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+
+            // Get form values
+            var fullName = document.getElementById("fullName").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // Check if Full Name is empty
+            if (fullName === "") {
+                document.getElementById("fullNameError").textContent = "Please enter your Full Name";
+                return false;
+            }
+
+            // Check if Email is empty and has a valid format
+            if (email === "") {
+                document.getElementById("emailError").textContent = "Please enter your Email Address";
+                return false;
+            } else if (!validateEmail(email)) {
+                document.getElementById("emailError").textContent = "Please enter a valid Email Address";
+                return false;
+            }
+
+            // Check if Password is empty
+            if (password === "") {
+                document.getElementById("passwordError").textContent = "Please enter a Password";
+                return false;
+            }
+
+            return true; // Form is valid
+        }
+
+        function validateEmail(email) {
+            var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            return emailRegex.test(email);
+        }
+    </script>
+</body>
+</html>
